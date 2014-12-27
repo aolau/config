@@ -16,6 +16,16 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
+; Install my packages
+(defvar soaboom-packages
+  '(slime switch-window magit paredit))
+
+(require 'cl-lib)
+
+(dolist (pkg soaboom-packages)
+  (when (not (package-installed-p pkg))
+	(package-install pkg)))
+
 ; Setup common lisp environment
 (setq inferior-lisp-program "sbcl")
 (slime-setup  '(slime-repl slime-fancy slime-banner))
