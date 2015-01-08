@@ -3,7 +3,6 @@
 
 (show-paren-mode 1)
 
-(global-set-key (kbd "C-x o") 'switch-window)
 
 ; Setup tabs and spaces
 (setq-default c-basic-offset 4
@@ -15,6 +14,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
+(package-refresh-contents)
 
 ; Install my packages
 (defvar soaboom-packages
@@ -25,6 +25,15 @@
 (dolist (pkg soaboom-packages)
   (when (not (package-installed-p pkg))
 	(package-install pkg)))
+
+; Keyboard shortcuts
+(global-set-key (kbd "C-x o") 'switch-window)
+(global-set-key (kbd "C-x d") 'delete-other-window)
+
+; Setup ido-mode
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 ; Setup common lisp environment
 (setq inferior-lisp-program "sbcl")
