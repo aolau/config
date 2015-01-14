@@ -3,6 +3,8 @@
 
 (show-paren-mode 1)
 
+; Mode-line
+(setq-default mode-line-format `("%f  %4l" (:eval (if vc-mode (concat " [" vc-mode " ]"))) " ( %m )"))
 
 ; Setup tabs and spaces
 (setq-default c-basic-offset 4
@@ -37,4 +39,4 @@
 
 ; Setup common lisp environment
 (setq inferior-lisp-program "sbcl")
-(slime-setup  '(slime-repl slime-fancy slime-banner))
+(slime-setup '(slime-repl slime-fancy slime-banner))
