@@ -4,7 +4,12 @@
 (show-paren-mode 1)
 
 ; Mode-line
-(setq-default mode-line-format `("%f  %4l" (:eval (if vc-mode (concat " [" vc-mode " ]"))) " ( %m )"))
+(setq-default mode-line-format
+			  `((buffer-file-name (:eval (abbreviate-file-name buffer-file-name) "%b%"))
+				"%4l"
+				(vc-mode (:eval (concat " [" vc-mode " ]")))
+				" ( %m )"
+				" " mode-line-modified))
 
 ; Setup tabs and spaces
 (setq-default c-basic-offset 4
