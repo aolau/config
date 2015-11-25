@@ -2,6 +2,9 @@
 (menu-bar-mode -1)
 (show-paren-mode 1)
 
+;; Setup backup
+(setq backup-directory-alist '(("." . "~/.emacs_bkp")))
+(setq backup-by-copying t)
 
 ;; Setup tabs and spaces
 (setq-default c-basic-offset 2
