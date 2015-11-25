@@ -4,10 +4,11 @@
 
 
 ;; Setup tabs and spaces
-(setq-default c-basic-offset 4
-	      c-default-style "stroustrup"
-	      tab-width 4
-	      indent-tabs-mode t)
+(setq-default c-basic-offset 2
+              c-default-style "stroustrup"
+              tab-width 2
+              indent-tabs-mode nil
+              lua-indent-level 2)
 
 ;; Package
 (require 'package)
@@ -38,10 +39,13 @@
 (define-key paredit-mode-map (kbd "C-M-[") 'paredit-backward-slurp-sexp)
 (define-key paredit-mode-map (kbd "C-M-]") 'paredit-backward-barf-sexp)
 
-;; Setup ido-mode
+;; Ido-mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+
+;; Magit
+(global-set-key (kbd "C-c g") 'magit-status)
 
 ;; Auto complete
 (require 'auto-complete-config)
