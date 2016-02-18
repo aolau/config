@@ -7,9 +7,9 @@
 (setq backup-by-copying t)
 
 ;; Setup tabs and spaces
-(setq-default c-basic-offset 2
+(setq-default c-basic-offset 4
               c-default-style "stroustrup"
-              tab-width 2
+              tab-width 4
               indent-tabs-mode nil
               lua-indent-level 2)
 
@@ -47,15 +47,21 @@
 (setq ido-everywhere t)
 (ido-mode 1)
 
+;;; Key bindings
 ;; Magit
 (global-set-key (kbd "C-c g") 'magit-status)
+
+;; nodejs
+(global-set-key (kbd "C-c b") 'nodejs-repl-send-buffer)
+(global-set-key (kbd "C-c q") 'nodejs-repl-quit-or-cancel)
+
 
 ;; Auto complete
 (require 'auto-complete-config)
 (ac-config-default)
 
 ; Sane ac delay times
-(setq ac-delay 1.0)
+(setq ac-delay 0.5)
 (setq ac-quick-help-delay 2.0)
 
 ;; Setup Common Lisp
@@ -87,3 +93,6 @@
 (setq merlin-use-auto-complete-mode 'easy)
 (setq merlin-error-after-save nil)
 
+;; Setup Python
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
