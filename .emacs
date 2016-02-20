@@ -17,7 +17,6 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
-;(package-refresh-contents)
 
 ;; Install my packages
 (defvar soaboom-packages
@@ -25,9 +24,13 @@
 
 (require 'cl-lib)
 
-(dolist (pkg soaboom-packages)
-  (when (not (package-installed-p pkg))
-	(package-install pkg)))
+(defun soaboom-install-packages ()
+  (package-refresh-contents)
+  (dolist (pkg soaboom-packages)
+    (when (not (package-installed-p pkg))
+      (package-install pkg))))
+
+; (soaboom-install-packages)
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x o") 'switch-window)
