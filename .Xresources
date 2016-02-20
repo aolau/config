@@ -1,0 +1,15 @@
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+xterm*loginShell: true
+xterm*faceName: Bitstream Vera Serif Mono
+xterm*faceSize: 16
+xterm*termName: xterm-256color
+xterm*eightBitInput: false
+xterm*eightBitOutput: true
+xterm*metaSendsEscape: true
+
+#include "/home/andreas/files/tomorrow/XresourceTomorrowNight"
