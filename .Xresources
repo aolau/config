@@ -12,4 +12,4 @@ xterm*eightBitInput: false
 xterm*eightBitOutput: true
 xterm*metaSendsEscape: true
 
-#include "/home/andreas/files/tomorrow/XresourceTomorrowNight"
+#include "/home/andreas/files/config/tomorrow/XresourceTomorrowNight"
