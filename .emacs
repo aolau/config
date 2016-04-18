@@ -30,11 +30,17 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-; (soaboom-install-packages)
+;(soaboom-install-packages)
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x o") 'switch-window)
 (global-set-key (kbd "C-x d") 'delete-other-window)
+
+(defun soaboom-find-tag-default ()
+  (interactive)
+  (find-tag (find-tag-default)))
+
+(global-set-key (kbd "M-.") 'soaboom-find-tag-default)
 
 (require 'paredit)
 
@@ -55,8 +61,8 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 ;; nodejs
-(global-set-key (kbd "C-c b") 'nodejs-repl-send-buffer)
-(global-set-key (kbd "C-c q") 'nodejs-repl-quit-or-cancel)
+; (global-set-key (kbd "C-c b") 'nodejs-repl-send-buffer)
+; (global-set-key (kbd "C-c q") 'nodejs-repl-quit-or-cancel)
 
 
 ;; Auto complete
@@ -97,5 +103,5 @@
 (setq merlin-error-after-save nil)
 
 ;; Setup Python
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+(setq elpy-rpc-python-command "python3")
+(elpy-enable)
