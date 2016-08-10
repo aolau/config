@@ -1,6 +1,7 @@
 ;; Disable menubar etc
 (menu-bar-mode -1)
 (show-paren-mode 1)
+(setq inhibit-splash-screen t)
 
 ;; Setup backup
 (setq backup-directory-alist '(("." . "~/.emacs_bkp")))
@@ -20,7 +21,7 @@
 
 ;; Install my packages
 (defvar soaboom-packages
-  '(slime ac-slime switch-window magit paredit tuareg merlin utop))
+  '(slime ac-slime ace-window magit paredit elpy))
 
 (require 'cl-lib)
 
@@ -33,7 +34,7 @@
 ;(soaboom-install-packages)
 
 ;; Keyboard shortcuts
-(global-set-key (kbd "C-x o") 'switch-window)
+(global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x d") 'delete-other-window)
 
 (defun soaboom-find-tag-default ()
@@ -81,26 +82,6 @@
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 (eval-after-load "auto-complete"
   '(add-to-list 'ac-modes 'slime-repl-mode))
-
-;; Setup OCaml
-(setq auto-mode-alist
-	  (append '(("\\.ml[ily]?$" . tuareg-mode)
-				("\\.topml$" . tuareg-mode))
-			  auto-mode-alist))
-
-(autoload 'utop "utop" "Toplevel for OCaml" t)
-(autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
-(add-hook 'tuareg-mode-hook 'utop-minor-mode)
-
-;; Merlin
-(add-to-list 'load-path (concat (substring (shell-command-to-string "opam config var share") 0 -1)
-								"/emacs/site-lisp"))
-(require 'merlin)
-
-(add-hook 'tuareg-mode-hook 'merlin-mode)
-
-(setq merlin-use-auto-complete-mode 'easy)
-(setq merlin-error-after-save nil)
 
 ;; Setup Python
 (setq elpy-rpc-python-command "python3")
