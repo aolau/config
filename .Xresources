@@ -2,11 +2,11 @@ Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb
 Xft.hinting:    true
-Xft.hintstyle:  hintslight
+Xft.hintstyle:  hintfull
 
 xterm*loginShell: true
-xterm*faceName: Bitstream Vera Serif Mono
-xterm*faceSize: 10
+xterm*faceName: DejaVu Sans Mono
+xterm*faceSize: 17
 xterm*termName: xterm-256color
 xterm*eightBitInput: false
 xterm*eightBitOutput: true
