@@ -15,15 +15,32 @@ call vundle#end()
 filetype plugin indent on
 colorscheme apprentice
 set tabstop=4 shiftwidth=4 expandtab
+set number
 
 set nofoldenable
+map <Space>q :q<CR>
 
-map <Space>mm :make<CR>
-map <Space>mc :make clean<CR>
-map <Space>mn :cnext <CR>
-map <Space>mp :cprevious<CR>
+map <Space>w :w<CR>
+map <Space>s :% s/
+
+map <Space>r :set relativenumber nonumber<CR>
+map <Space>a :set norelativenumber number<CR>
+
+map <Space>t :NERDTreeToggle<CR>
+
+map <Space>mm :make<CR><CR>
+map <Space>mc :make clean<CR><CR>
+map <space>n :cnext <cr>
+map <space>p :cprevious<cr>
+map <space>f :cfirst<cr>
+map <space>l :clast<cr>
+map <Space>o :copen<CR>
+map <Space>c :cclose<CR>
 
 map <Space>gs :Gstatus<CR>
-
+map <Space>ge :Gedit<CR>
+map <Space>gl :Glog -10<CR><CR><CR> :copen <CR>
+map <Space>gla :Glog --<CR><CR><CR> :copen <CR>
+map <Space>gq :cclose<CR> :Gedit <CR>
 map <Space>gg :GitGutterToggle<CR>
 
