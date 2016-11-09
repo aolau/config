@@ -9,20 +9,30 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-scripts/Conque-GDB'
 
 call vundle#end()
 
 filetype plugin indent on
+
 colorscheme apprentice
+
 set tabstop=4 shiftwidth=4 expandtab
+
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
 set number
-
 set nofoldenable
-map <Space>q :q<CR>
 
+set nobackup
+set noswapfile
+
+map <Space>q :q<CR>
 map <Space>w :w<CR>
 map <Space>s :% s/
-
+map <Space>h :nohlsearch<CR>
 map <Space>r :set relativenumber nonumber<CR>
 map <Space>a :set norelativenumber number<CR>
 
@@ -39,6 +49,7 @@ map <Space>c :cclose<CR>
 
 map <Space>gs :Gstatus<CR>
 map <Space>ge :Gedit<CR>
+map <Space>gb :Gblame<CR>
 map <Space>gl :Glog -10<CR><CR><CR> :copen <CR>
 map <Space>gla :Glog --<CR><CR><CR> :copen <CR>
 map <Space>gq :cclose<CR> :Gedit <CR>
