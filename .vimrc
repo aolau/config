@@ -29,6 +29,8 @@ set nofoldenable
 set nobackup
 set noswapfile
 
+set completeopt-=preview
+
 map <Space>q :q<CR>
 map <Space>w :w<CR>
 map <Space>s :% s/
