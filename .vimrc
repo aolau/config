@@ -10,6 +10,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()
 
@@ -31,6 +33,9 @@ set noswapfile
 
 set completeopt-=preview
 
+set laststatus=2
+let g:airline#extensions#whitespace#enabled = 0
+
 map <Space>q :q<CR>
 map <Space>w :w<CR>
 map <Space>s :% s/
@@ -40,14 +45,17 @@ map <Space>a :set norelativenumber number<CR>
 
 map <Space>t :NERDTreeToggle<CR>
 
+map <Space>b :CtrlPBuffer<CR>
+map <Space>f :CtrlP<CR>
+
 map <Space>mm :make<CR><CR>
 map <Space>mc :make clean<CR><CR>
 map <space>n :cnext <cr>
 map <space>p :cprevious<cr>
-map <space>f :cfirst<cr>
-map <space>l :clast<cr>
-map <Space>o :copen<CR>
-map <Space>c :cclose<CR>
+map <space>cf :cfirst<cr>
+map <space>cl :clast<cr>
+map <Space>co :copen<CR>
+map <Space>cc :cclose<CR>
 
 map <Space>gs :Gstatus<CR>
 map <Space>ge :Gedit<CR>
