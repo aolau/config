@@ -8,10 +8,12 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-scripts/Conque-GDB'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kovisoft/slimv'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()
 
@@ -31,10 +33,14 @@ set nofoldenable
 set nobackup
 set noswapfile
 
+set cinoptions+=g0
+
 set completeopt-=preview
 
 set laststatus=2
 let g:airline#extensions#whitespace#enabled = 0
+
+inoremap <C-e> <Esc>
 
 map <Space>q :q<CR>
 map <Space>w :w<CR>
@@ -43,8 +49,8 @@ map <Space>h :nohlsearch<CR>
 map <Space>r :set relativenumber nonumber<CR>
 map <Space>a :set norelativenumber number<CR>
 
-map <Space>t :NERDTreeToggle<CR>
-
+map <Space>tt :NERDTreeToggle<CR>
+map <Space>tg :TagbarToggle<CR>
 map <Space>b :CtrlPBuffer<CR>
 map <Space>f :CtrlP<CR>
 
