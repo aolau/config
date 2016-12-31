@@ -14,6 +14,11 @@
               indent-tabs-mode nil
               lua-indent-level 2)
 
+;; Backspace
+(global-set-key (kbd "C-h") 'delete-backward-char)
+(global-set-key (kbd "M-h") 'backward-kill-word)
+(global-set-key (kbd "<f1>") 'help-command)
+
 ;; Package
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
