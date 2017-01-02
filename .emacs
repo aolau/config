@@ -1,5 +1,13 @@
 ;; Disable menubar etc
 (menu-bar-mode -1)
+
+(when (display-graphic-p)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (load-theme 'deeper-blue))
+
+(setq ring-bell-function 'ignore)
+
 (show-paren-mode 1)
 (setq inhibit-splash-screen t)
 
@@ -26,7 +34,7 @@
 
 ;; Install my packages
 (defvar soaboom-packages
-  '(slime ac-slime ace-window magit paredit elpy))
+  '(slime ac-slime ace-window magit paredit))
 
 (require 'cl-lib)
 
@@ -39,8 +47,9 @@
 ;(soaboom-install-packages)
 
 ;; Keyboard shortcuts
-(global-set-key (kbd "C-x o") 'ace-window)
 (global-set-key (kbd "C-x d") 'delete-other-window)
+
+(windmove-default-keybindings)
 
 (defun soaboom-find-tag-default ()
   (interactive)
@@ -57,6 +66,10 @@
 (define-key paredit-mode-map (kbd "C-M-[") 'paredit-backward-slurp-sexp)
 (define-key paredit-mode-map (kbd "C-M-]") 'paredit-backward-barf-sexp)
 
+;; Ediff options
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-split-window-function 'split-window-horizontally)
+
 ;; Ido-mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
@@ -65,11 +78,6 @@
 ;;; Key bindings
 ;; Magit
 (global-set-key (kbd "C-c g") 'magit-status)
-
-;; nodejs
-; (global-set-key (kbd "C-c b") 'nodejs-repl-send-buffer)
-; (global-set-key (kbd "C-c q") 'nodejs-repl-quit-or-cancel)
-
 
 ;; Auto complete
 (require 'auto-complete-config)
@@ -88,6 +96,5 @@
 (eval-after-load "auto-complete"
   '(add-to-list 'ac-modes 'slime-repl-mode))
 
-;; Setup Python
-(setq elpy-rpc-python-command "python3")
-(elpy-enable)
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
