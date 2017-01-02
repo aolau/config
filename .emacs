@@ -11,6 +11,11 @@
 (show-paren-mode 1)
 (setq inhibit-splash-screen t)
 
+(if (not (string-equal system-type "darwin"))
+    (set-face-attribute 'default nil
+                        :family "DejaVu Sans Mono"
+                        :height 160))
+                    
 ;; Setup backup
 (setq backup-directory-alist '(("." . "~/.emacs_bkp")))
 (setq backup-by-copying t)
