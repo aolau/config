@@ -3,8 +3,9 @@
 
 (when (display-graphic-p)
   (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (load-theme 'deeper-blue))
+  (scroll-bar-mode -1))
+
+(load-theme 'wombat)
 
 (setq ring-bell-function 'ignore)
 
@@ -39,7 +40,7 @@
 
 ;; Install my packages
 (defvar soaboom-packages
-  '(slime ac-slime ace-window magit paredit))
+  '(slime ac-slime magit paredit))
 
 (require 'cl-lib)
 
