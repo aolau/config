@@ -5,8 +5,6 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
-(load-theme 'wombat)
-
 (setq ring-bell-function 'ignore)
 
 (show-paren-mode 1)
@@ -15,7 +13,7 @@
 (if (not (string-equal system-type "darwin"))
     (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
-                        :height 160))
+                        :height 120))
                     
 ;; Setup backup
 (setq backup-directory-alist '(("." . "~/.emacs_bkp")))
@@ -104,3 +102,6 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+;; Setup theme
+(load-theme 'zenburn)
