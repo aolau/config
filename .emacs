@@ -87,9 +87,12 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
-; Sane ac delay times
-(setq ac-delay 0.5)
-(setq ac-quick-help-delay 2.0)
+(global-set-key (kbd "M-;") 'auto-complete)
+
+(setq ac-auto-show-menu nil)
+(setq ac-auto-start nil)
+(setq ac-delay 0)
+(setq ac-quick-help-delay 1.0)
 
 ;; Setup Common Lisp
 (setq inferior-lisp-program "sbcl")
@@ -105,4 +108,3 @@
 
 ;; Setup theme
 (load-theme 'zenburn)
-
