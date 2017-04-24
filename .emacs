@@ -38,7 +38,7 @@
 
 ;; Install my packages
 (defvar soaboom-packages
-  '(slime ac-slime magit paredit irony company company-irony rtags cmake-ide))
+  '(slime ac-slime magit paredit zenburn-theme))
 
 (require 'cl-lib)
 
@@ -65,10 +65,10 @@
 
 ;; Paredit keys
 (define-key paredit-mode-map (kbd "M-]") 'paredit-forward-slurp-sexp)
-(define-key paredit-mode-map (kbd "M-[") 'paredit-forward-barf-sexp)
+(define-key paredit-mode-map (kbd "C-M-]") 'paredit-forward-barf-sexp)
 
-(define-key paredit-mode-map (kbd "C-M-[") 'paredit-backward-slurp-sexp)
-(define-key paredit-mode-map (kbd "C-M-]") 'paredit-backward-barf-sexp)
+(define-key paredit-mode-map (kbd "M-[") 'paredit-backward-slurp-sexp)
+(define-key paredit-mode-map (kbd "C-M-[") 'paredit-backward-barf-sexp)
 
 ;; Ediff options
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -84,8 +84,8 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 ;; Auto complete
-;(require 'auto-complete-config)
-;(ac-config-default)
+(require 'auto-complete-config)
+(ac-config-default)
 
 ; Sane ac delay times
 (setq ac-delay 0.5)
@@ -106,13 +106,3 @@
 ;; Setup theme
 (load-theme 'zenburn)
 
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
-
-(add-hook 'after-init-hook 'global-company-mode)
-
-(add-hook 'c++-mode-hook 'irony-mode)
-(global-set-key (kbd "M-RET") 'company-complete)
-
-(require 'rtags)
-(cmake-ide-setup)
