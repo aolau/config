@@ -15,7 +15,7 @@
       ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
       (t (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
-                        :height 120)))
+                        :height 110)))
 
 ;; Git binary
 (if (string-equal system-type "windows-nt")
@@ -43,29 +43,29 @@
 (package-initialize)
 
 ;; Install my packages
-(defvar soaboom-packages
+(defvar aolau-packages
   '(slime ac-slime magit paredit zenburn-theme afternoon))
 
 (require 'cl-lib)
 
-(defun soaboom-install-packages ()
+(defun aolau-install-packages ()
   (package-refresh-contents)
-  (dolist (pkg soaboom-packages)
+  (dolist (pkg aolau-packages)
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-;(soaboom-install-packages)
+;(aolau-install-packages)
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'delete-other-window)
 
 (windmove-default-keybindings)
 
-(defun soaboom-find-tag-default ()
+(defun aolau-find-tag-default ()
   (interactive)
   (find-tag (find-tag-default)))
 
-(global-set-key (kbd "M-.") 'soaboom-find-tag-default)
+(global-set-key (kbd "M-.") 'aolau-find-tag-default)
 
 (require 'paredit)
 
