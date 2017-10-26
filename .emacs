@@ -10,11 +10,17 @@
 (show-paren-mode 1)
 (setq inhibit-splash-screen t)
 
-(if (not (string-equal system-type "darwin"))
-    (set-face-attribute 'default nil
+;; Font
+(cond ((string-equal system-type "darwin") t)
+      ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
+      (t (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
-                        :height 120))
-                    
+                        :height 120)))
+
+;; Git binary
+(if (string-equal system-type "windows-nt")
+    (setq magit-git-executable "C:/Program Files/Git/bin/git.exe"))
+
 ;; Setup backup
 (setq backup-directory-alist '(("." . "~/.emacs_bkp")))
 (setq backup-by-copying t)
@@ -38,7 +44,7 @@
 
 ;; Install my packages
 (defvar soaboom-packages
-  '(slime ac-slime magit paredit zenburn-theme))
+  '(slime ac-slime magit paredit zenburn-theme afternoon))
 
 (require 'cl-lib)
 
@@ -107,4 +113,4 @@
 (load custom-file)
 
 ;; Setup theme
-(load-theme 'zenburn)
+(load-theme 'afternoon)
