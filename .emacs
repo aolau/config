@@ -18,8 +18,9 @@
                         :height 100)))
 
 ;; Git binary
-(if (string-equal system-type "windows-nt")
-    (setq magit-git-executable "C:/Program Files/Git/bin/git.exe"))
+(when (string-equal system-type "windows-nt")
+  (setq magit-git-executable "C:/Program Files/Git/bin/git.exe")
+  (setq ediff-diff-program "C:/Program Files/Git/bin/diff.exe"))
 
 ;; Setup backup
 (setq backup-directory-alist '(("." . "~/.emacs_bkp")))
