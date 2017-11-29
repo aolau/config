@@ -15,7 +15,7 @@
       ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
       (t (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
-                        :height 110)))
+                        :height 100)))
 
 ;; Git binary
 (if (string-equal system-type "windows-nt")
@@ -84,6 +84,14 @@
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
+;; Smex
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; Old M-x.
+; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;; Key bindings
 ;; Magit
