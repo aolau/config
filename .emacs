@@ -82,15 +82,20 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 
 ;; Ido-mode
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-(ido-vertical-mode 1)
-(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+;(setq ido-enable-flex-matching t)
+;(setq ido-everywhere t)
+;(ido-mode 1)
+;(ido-vertical-mode 1)
+;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
+
+;; Ivy
+(ivy-mode 1)
 
 ;; Smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;(global-set-key (kbd "M-x") 'smex)
+;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+
 ;; Old M-x.
 ; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
