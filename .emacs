@@ -62,11 +62,34 @@
 
 (windmove-default-keybindings)
 
+;; Tags
 (defun aolau-find-tag-default ()
   (interactive)
   (find-tag (find-tag-default)))
 
-(global-set-key (kbd "M-.") 'aolau-find-tag-default)
+(defvar *aolau-engine-root* "/home/cmp/code/engine/")
+
+(defun aolau-set-engine-root ()
+  (interactive
+   (setq *aolau-engine-root* (read-string "Engine root: " *aolau-engine-root*))))
+
+(defun aolau-ctags-c++ ()
+  (interactive)
+  (let ((ctags-root *aolau-engine-root*))
+    (shell-command (concat "ctags -e -R --c++-kinds=+p --fields=iaS --extra=+q -f"
+                           (concat ctags-root "TAGS")
+                           (concat ctags-root "src")))
+    (visit-tags-table (concat ctags-root "TAGS"))))
+
+(global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
+(global-set-key (kbd "M-,") 'etags-select-find-tag)
+
+(defun aolau-rgrep ()
+  (interactive)
+  (let ((pattern (read-string "Pattern: " (thing-at-point 'word))))
+    (rgrep pattern "*.h *.c *.cpp" *aolau-engine-root* nil)))
+
+(global-set-key (kbd "M-/") 'aolau-rgrep)
 
 (require 'paredit)
 
