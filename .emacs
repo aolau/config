@@ -93,8 +93,9 @@
 (defun aolau-ctags-c++ ()
   (interactive)
   (let ((ctags-root *aolau-engine-root*))
-    (shell-command (concat "ctags -e -R --c++-kinds=+p --fields=iaS --extra=+q -f"
+    (shell-command (concat "ctags -e -R --c++-kinds=+p --fields=iaS -f "
                            (concat ctags-root "TAGS")
+                           " "
                            (concat ctags-root "src")))
     (visit-tags-table (concat ctags-root "TAGS"))))
 
