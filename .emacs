@@ -10,6 +10,8 @@
 (show-paren-mode 1)
 (setq inhibit-splash-screen t)
 
+(global-hl-line-mode 1)
+
 ;; Font
 (cond ((string-equal system-type "darwin") t)
       ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
@@ -67,12 +69,27 @@
   (interactive)
   (find-tag (find-tag-default)))
 
+
+;; Engine
 (defvar *aolau-engine-root* "/home/cmp/code/engine/")
 
-(defun aolau-set-engine-root ()
-  (interactive
-   (setq *aolau-engine-root* (read-string "Engine root: " *aolau-engine-root*))))
+(defun aolau-cd-engine-root ()
+  (interactive)
+  (cd *aolau-engine-root*))
 
+(defun aolau-set-engine-root ()
+  (interactive)
+  (setq *aolau-engine-root* (read-string "Engine root: " *aolau-engine-root*)))
+
+(defun aolau-compile-engine ()
+  (interactive)
+  (and (aolau-cd-engine-root)
+       (compile "make -k QlikMain CONFIG=RELEASE")))
+
+(global-set-key (kbd "C-c c") 'aolau-compile-engine)
+
+
+;; Ctags
 (defun aolau-ctags-c++ ()
   (interactive)
   (let ((ctags-root *aolau-engine-root*))
@@ -83,6 +100,11 @@
 
 (global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
 (global-set-key (kbd "M-,") 'etags-select-find-tag)
+
+
+;; Rgrep
+(eval-after-load "grep"
+  '(grep-compute-defaults))
 
 (defun aolau-rgrep ()
   (interactive)
