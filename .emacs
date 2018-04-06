@@ -47,7 +47,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit zenburn-theme afternoon))
+  '(slime ac-slime magit paredit ivy counsel smex zenburn-theme afternoon-theme))
 
 (require 'cl-lib)
 
@@ -69,35 +69,39 @@
   (interactive)
   (find-tag (find-tag-default)))
 
+;; Qlik stuff
+(defvar *qlik-engine-root* "/home/cmp/files/engine/")
 
-;; Engine
-(defvar *aolau-engine-root* "/home/cmp/code/engine/")
-
-(defun aolau-cd-engine-root ()
+(defun qlik-cd-engine-root ()
   (interactive)
-  (cd *aolau-engine-root*))
+  (cd *qlik-engine-root*))
 
-(defun aolau-set-engine-root ()
+(defun qlik-set-engine-root ()
   (interactive)
-  (setq *aolau-engine-root* (read-string "Engine root: " *aolau-engine-root*)))
+  (setq *qlik-engine-root* (read-directory-name "Engine root: " *qlik-engine-root*))
+  (qlik-cd-engine-root))
 
-(defun aolau-compile-engine ()
+(defun qlik-compile-engine ()
   (interactive)
-  (and (aolau-cd-engine-root)
+  (and (qlik-cd-engine-root)
        (compile "make -k QlikMain CONFIG=RELEASE")))
 
-(global-set-key (kbd "C-c c") 'aolau-compile-engine)
-
+(global-set-key (kbd "C-c c") 'qlik-compile-engine)
 
 ;; Ctags
-(defun aolau-ctags-c++ ()
+(defun qlik-ctags-c++ ()
   (interactive)
-  (let ((ctags-root *aolau-engine-root*))
-    (shell-command (concat "ctags -e -R --c++-kinds=+p --fields=iaS -f "
-                           (concat ctags-root "TAGS")
+  (let* ((ctags-root (read-directory-name "Tags root: " (concat *qlik-engine-root* "src/")))
+         (ctags-file (concat ctags-root "TAGS")))
+    (shell-command (concat "ctags -e -R --c++-kinds=+p --fields=+iaS --extra=+qf -f "
+                           ctags-file
                            " "
-                           (concat ctags-root "src")))
-    (visit-tags-table (concat ctags-root "TAGS"))))
+                           ctags-root))
+    (visit-tags-table ctags-file)))
+
+(eval-after-load "etags"
+  '(progn
+     (ac-etags-setup)))
 
 (global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
 (global-set-key (kbd "M-,") 'etags-select-find-tag)
@@ -107,12 +111,21 @@
 (eval-after-load "grep"
   '(grep-compute-defaults))
 
-(defun aolau-rgrep ()
+(defun qlik-rgrep ()
   (interactive)
-  (let ((pattern (read-string "Pattern: " (thing-at-point 'word))))
-    (rgrep pattern "*.h *.c *.cpp" *aolau-engine-root* nil)))
+  (let ((pattern (read-string "Pattern: " (if (region-active-p)
+                                              (buffer-substring (mark) (point))
+                                            (thing-at-point 'word)))))
+    (rgrep pattern "*.h *.c *.cpp" *qlik-engine-root* nil)))
 
-(global-set-key (kbd "M-/") 'aolau-rgrep)
+(global-set-key (kbd "M-/") 'qlik-rgrep)
+
+(defun qlik-find-file ()
+  (interactive)
+  (let ((dir (read-directory-name "Find root: " *qlik-engine-root*)))
+    (find-name-dired dir (read-string "Pattern: " ".*"))))
+
+(global-set-key (kbd "M-\\") 'qlik-find-file)
 
 (require 'paredit)
 
@@ -127,19 +140,10 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
 
-;; Ido-mode
-;(setq ido-enable-flex-matching t)
-;(setq ido-everywhere t)
-;(ido-mode 1)
-;(ido-vertical-mode 1)
-;(setq ido-vertical-define-keys 'C-n-and-C-p-only)
-
 ;; Ivy
 (ivy-mode 1)
 
-;; Smex
-;(global-set-key (kbd "M-x") 'smex)
-;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; Counsel
 (global-set-key (kbd "M-x") 'counsel-M-x)
 
 ;; Old M-x.
