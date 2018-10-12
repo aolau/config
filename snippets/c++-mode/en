@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: c++ enum class
+# key: en
+# --
+enum class ${1:Name} {$2};

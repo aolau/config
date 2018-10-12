@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: c++ for
+# key: fr
+# --
+for (auto$1 : $2) {
+    $0
+}

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: auto decl
+# key: a
+# --
+auto $1 = $0;

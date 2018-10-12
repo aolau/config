@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: c++ include
+# key: in
+# --
+#include "$1.h"

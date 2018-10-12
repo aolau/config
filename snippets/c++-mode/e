@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: c++ else
+# key: e
+# --
+else {
+     $0
+}

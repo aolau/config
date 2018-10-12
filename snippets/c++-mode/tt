@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: c++ template type
+# key: tt
+# --
+, typename $1

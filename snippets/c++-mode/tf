@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: c++ template header
+# key: tf
+# --
+template <typename $1$0>

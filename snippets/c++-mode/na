@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: c++ namespace
+# key: na
+# --
+namespace $1{
+    $0
+}

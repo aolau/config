@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: c++ class
+# key: cl
+# --
+class ${1:Name}$2 {
+public:
+    $1() = default;
+    virtual ~$1() {}
+    $0
+private:
+};

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: c++ class function
+# key: cfu
+# --
+${1:Ret} ${2:Class}::${3:Name}($4)
+{
+    $0
+}

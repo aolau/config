@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: c++ case
+# key: ca
+# --
+case $1:
+    $0
+    break;
