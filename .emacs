@@ -28,6 +28,8 @@
 (setq backup-directory-alist '(("." . "~/.emacs_bkp")))
 (setq backup-by-copying t)
 
+(setq auto-save-default nil)
+
 ;; Setup tabs and spaces
 (setq-default c-basic-offset 4
               c-default-style "stroustrup"
@@ -35,10 +37,20 @@
               indent-tabs-mode nil
               lua-indent-level 2)
 
+;; C++-mode
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 ;; Backspace
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "<f1>") 'help-command)
+
+;; Split behavior
+(setq split-height-threshold nil)
+
+;; Forward word
+(require 'misc)
+(global-set-key (kbd "M-f") 'forward-to-word)
 
 ;; Package
 (require 'package)
@@ -47,7 +59,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit ivy counsel smex zenburn-theme afternoon-theme))
+  '(slime ac-slime magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme))
 
 (require 'cl-lib)
 
@@ -61,43 +73,11 @@
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'delete-other-window)
+(global-set-key (kbd "M-*") 'pop-tag-mark)
+(global-set-key (kbd "C-c s") 'projectile-find-other-file)
 
 (windmove-default-keybindings)
 
-;; Tags
-(defun aolau-find-tag-default ()
-  (interactive)
-  (find-tag (find-tag-default)))
-
-;; Qlik stuff
-(defvar *qlik-engine-root* "/home/cmp/files/engine/")
-
-(defun qlik-cd-engine-root ()
-  (interactive)
-  (cd *qlik-engine-root*))
-
-(defun qlik-set-engine-root ()
-  (interactive)
-  (setq *qlik-engine-root* (read-directory-name "Engine root: " *qlik-engine-root*))
-  (qlik-cd-engine-root))
-
-(defun qlik-compile-engine ()
-  (interactive)
-  (and (qlik-cd-engine-root)
-       (compile "make -k QlikMain CONFIG=RELEASE")))
-
-(global-set-key (kbd "C-c c") 'qlik-compile-engine)
-
-;; Ctags
-(defun qlik-ctags-c++ ()
-  (interactive)
-  (let* ((ctags-root (read-directory-name "Tags root: " (concat *qlik-engine-root* "src/")))
-         (ctags-file (concat ctags-root "TAGS")))
-    (shell-command (concat "ctags -e -R --c++-kinds=+p --fields=+iaS --extra=+qf -f "
-                           ctags-file
-                           " "
-                           ctags-root))
-    (visit-tags-table ctags-file)))
 
 (eval-after-load "etags"
   '(progn
@@ -106,26 +86,9 @@
 (global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
 (global-set-key (kbd "M-,") 'etags-select-find-tag)
 
-
 ;; Rgrep
 (eval-after-load "grep"
   '(grep-compute-defaults))
-
-(defun qlik-rgrep ()
-  (interactive)
-  (let ((pattern (read-string "Pattern: " (if (region-active-p)
-                                              (buffer-substring (mark) (point))
-                                            (thing-at-point 'word)))))
-    (rgrep pattern "*.h *.c *.cpp" *qlik-engine-root* nil)))
-
-(global-set-key (kbd "M-/") 'qlik-rgrep)
-
-(defun qlik-find-file ()
-  (interactive)
-  (let ((dir (read-directory-name "Find root: " *qlik-engine-root*)))
-    (find-name-dired dir (read-string "Pattern: " ".*"))))
-
-(global-set-key (kbd "M-\\") 'qlik-find-file)
 
 (require 'paredit)
 
@@ -140,8 +103,10 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 (setq ediff-split-window-function 'split-window-horizontally)
 
-;; Ivy
+;; Ivy and counsel
 (ivy-mode 1)
+(counsel-projectile-mode)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Counsel
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -153,6 +118,8 @@
 ;; Magit
 (global-set-key (kbd "C-c g") 'magit-status)
 
+(global-set-key (kbd "C-c r") 'revert-buffer)
+
 ;; Auto complete
 (require 'auto-complete-config)
 (ac-config-default)
@@ -163,6 +130,9 @@
 (setq ac-auto-start nil)
 (setq ac-delay 0)
 (setq ac-quick-help-delay 1.0)
+
+;; yasnippet
+(yas-global-mode)
 
 ;; Setup Common Lisp
 (setq inferior-lisp-program "sbcl")
@@ -176,5 +146,9 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+(setq search-upper-case t)
+
 ;; Setup theme
 (load-theme 'afternoon)
+
+(load "~/files/qlik_scripts/qlik.el")
