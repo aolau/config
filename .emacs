@@ -59,7 +59,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme))
+  '(slime ac-slime magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet ac-etags))
 
 (require 'cl-lib)
 
@@ -151,4 +151,4 @@
 ;; Setup theme
 (load-theme 'afternoon)
 
-(load "~/files/qlik_scripts/qlik.el")
+(load "~/files/scripts/qlik.el")
