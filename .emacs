@@ -74,17 +74,15 @@
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'delete-other-window)
 (global-set-key (kbd "M-*") 'pop-tag-mark)
-(global-set-key (kbd "C-c s") 'projectile-find-other-file)
 
 (windmove-default-keybindings)
 
+;; (eval-after-load "etags"
+;;   '(progn
+;;      (ac-etags-setup)))
 
-(eval-after-load "etags"
-  '(progn
-     (ac-etags-setup)))
-
-(global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
-(global-set-key (kbd "M-,") 'etags-select-find-tag)
+;(global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
+;(global-set-key (kbd "M-,") 'etags-select-find-tag)
 
 ;; Rgrep
 (eval-after-load "grep"
@@ -115,9 +113,6 @@
 ; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;; Key bindings
-;; Magit
-(global-set-key (kbd "C-c g") 'magit-status)
-
 (global-set-key (kbd "C-c r") 'revert-buffer)
 
 ;; Auto complete
@@ -150,5 +145,26 @@
 
 ;; Setup theme
 (load-theme 'afternoon)
+(set-face-attribute 'mode-line nil :height 100 :family 'unspecified)
 
-(load "~/files/scripts/qlik.el")
+(require 'subr-x)
+(setq projectile-enable-caching t)
+(setq projectile-indexing-method 'native)
+
+(require 'ivy-xref)
+;; XRef initialization is different in Emacs 27
+(if (< emacs-major-version 27)
+    ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+    ;; commands other than xref-find-definitions
+    ;; (e.g. project-find-regexp):
+    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
+  ;; Emacs 27 only:
+  (setq xref-show-definitions-function #'ivy-xref-show-defs))
+
+;; For elpy
+(setq elpy-rpc-python-command "python3.7")
+;; For interactive shell
+(setq python-shell-interpreter "python3.7"
+      python-shell-interpreter-args "-i")
+
+(load "~/scripts/otii.el")
