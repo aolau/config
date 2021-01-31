@@ -12,6 +12,8 @@
 
 (global-hl-line-mode 1)
 
+(setq x-super-keysym 'meta)
+
 ;; Font
 (cond ((string-equal system-type "darwin") t)
       ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
@@ -59,7 +61,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet ac-etags))
+  '(slime ac-slime magit paredit ivy ivy-xref counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet ac-etags))
 
 (require 'cl-lib)
 
@@ -69,7 +71,7 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-;(aolau-install-packages)
+(aolau-install-packages)
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'delete-other-window)
@@ -166,5 +168,3 @@
 ;; For interactive shell
 (setq python-shell-interpreter "python3.7"
       python-shell-interpreter-args "-i")
-
-(load "~/scripts/otii.el")
