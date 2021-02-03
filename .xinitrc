@@ -1,2 +1,1 @@
-xrdb -merge /home/andreas/.Xresources
-exec spectrwm
+exec startxfce4
