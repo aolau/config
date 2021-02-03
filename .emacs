@@ -66,7 +66,7 @@
 (require 'cl-lib)
 
 (defun aolau-install-packages ()
-  (package-refresh-contents)
+;  (package-refresh-contents)
   (dolist (pkg aolau-packages)
     (when (not (package-installed-p pkg))
       (package-install pkg))))
