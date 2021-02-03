@@ -76,6 +76,7 @@
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'delete-other-window)
 (global-set-key (kbd "M-*") 'pop-tag-mark)
+(global-set-key (kbd "C-c g") 'magit-status)
 
 (windmove-default-keybindings)
 
