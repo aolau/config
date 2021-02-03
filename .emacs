@@ -61,7 +61,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit ivy ivy-xref counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet ac-etags))
+  '(slime ac-slime magit paredit ivy ivy-xref counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet counsel-etags cmake-mode typescript-mode))
 
 (require 'cl-lib)
 
@@ -79,12 +79,8 @@
 
 (windmove-default-keybindings)
 
-;; (eval-after-load "etags"
-;;   '(progn
-;;      (ac-etags-setup)))
-
-;(global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
-;(global-set-key (kbd "M-,") 'etags-select-find-tag)
+(global-set-key (kbd "M-.") 'counsel-etags-find-tag-at-point)
+(global-set-key (kbd "M-,") 'counsel-etags-list-tag-in-current-file)
 
 ;; Rgrep
 (eval-after-load "grep"
@@ -151,7 +147,7 @@
 
 (require 'subr-x)
 (setq projectile-enable-caching t)
-(setq projectile-indexing-method 'native)
+(setq projectile-indexing-method 'alien)
 
 (require 'ivy-xref)
 ;; XRef initialization is different in Emacs 27
