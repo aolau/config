@@ -165,3 +165,10 @@
 ;; For interactive shell
 (setq python-shell-interpreter "python3.7"
       python-shell-interpreter-args "-i")
+
+(defun load-if-exists (filename)
+  (if (file-exists-p filename)
+      (load filename)))
+
+(load-if-exists "~/otii.el")
+
