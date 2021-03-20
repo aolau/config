@@ -14,6 +14,10 @@
 
 (setq x-super-keysym 'meta)
 
+(put 'upcase-region 'disabled nil)
+
+(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
 ;; Font
 (cond ((string-equal system-type "darwin") t)
       ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
@@ -61,7 +65,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit ivy ivy-xref counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet counsel-etags cmake-mode typescript-mode))
+  '(slime ac-slime magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet counsel-etags cmake-mode typescript-mode))
 
 (require 'cl-lib)
 
@@ -71,7 +75,7 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-(aolau-install-packages)
+;(aolau-install-packages)
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'delete-other-window)
@@ -150,16 +154,6 @@
 (setq projectile-enable-caching t)
 (setq projectile-indexing-method 'alien)
 
-(require 'ivy-xref)
-;; XRef initialization is different in Emacs 27
-(if (< emacs-major-version 27)
-    ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-    ;; commands other than xref-find-definitions
-    ;; (e.g. project-find-regexp):
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)
-  ;; Emacs 27 only:
-  (setq xref-show-definitions-function #'ivy-xref-show-defs))
-
 ;; For elpy
 (setq elpy-rpc-python-command "python3.7")
 ;; For interactive shell
@@ -171,4 +165,3 @@
       (load filename)))
 
 (load-if-exists "~/otii.el")
-
