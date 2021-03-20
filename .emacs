@@ -84,9 +84,6 @@
 
 (windmove-default-keybindings)
 
-(global-set-key (kbd "M-.") 'counsel-etags-find-tag-at-point)
-(global-set-key (kbd "M-,") 'counsel-etags-list-tag-in-current-file)
-
 ;; Rgrep
 (eval-after-load "grep"
   '(grep-compute-defaults))
@@ -118,28 +115,25 @@
 ;;; Key bindings
 (global-set-key (kbd "C-c r") 'revert-buffer)
 
-;; Auto complete
-(require 'auto-complete-config)
-(ac-config-default)
+;; Auto complete with company
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay nil)
 
-(global-set-key (kbd "M-;") 'auto-complete)
-
-(setq ac-auto-show-menu nil)
-(setq ac-auto-start nil)
-(setq ac-delay 0)
-(setq ac-quick-help-delay 1.0)
+(global-set-key (kbd "M-;") 'company-complete)
 
 ;; yasnippet
 (yas-global-mode)
 
+;; C++
+(require 'eglot)
+(add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1) (eldoc-mode -1)))
+(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+(add-hook 'c-mode-hook 'eglot-ensure)
+(add-hook 'c++-mode-hook 'eglot-ensure)
+
 ;; Setup Common Lisp
 (setq inferior-lisp-program "sbcl")
-(slime-setup '(slime-repl slime-fancy slime-banner))
-
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'slime-repl-mode))
+(slime-setup '(slime-repl slime-fancy slime-banner slime-company))
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
