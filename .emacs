@@ -65,7 +65,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(slime ac-slime magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet counsel-etags cmake-mode typescript-mode))
+  '(company slime slime-company magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet cmake-mode typescript-mode eglot elpy))
 
 (require 'cl-lib)
 
