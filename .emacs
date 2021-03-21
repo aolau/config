@@ -79,8 +79,9 @@
 
 (defun kill-buffer-other-window ()
   (interactive)
-  (other-window 1)
-  (kill-buffer))
+  (save-window-excursion
+    (other-window 1)
+    (kill-buffer)))
 
 ;; Keyboard shortcuts
 (global-set-key (kbd "C-x d") 'kill-buffer-other-window)
