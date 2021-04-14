@@ -25,7 +25,7 @@
       ((string-equal system-type "windows-nt") (set-face-attribute 'default nil :family "Consolas" :height 120))
       (t (set-face-attribute 'default nil
                         :family "DejaVu Sans Mono"
-                        :height 100)))
+                        :height 120)))
 
 ;; Git binary
 (when (string-equal system-type "windows-nt")
@@ -151,7 +151,7 @@
 
 ;; Setup theme
 (load-theme 'afternoon)
-(set-face-attribute 'mode-line nil :height 100 :family 'unspecified)
+(set-face-attribute 'mode-line nil :height 130 :family "DejaVu Sans Mono")
 
 (require 'subr-x)
 (setq projectile-enable-caching t)
