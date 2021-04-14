@@ -14,6 +14,8 @@
 
 (setq x-super-keysym 'meta)
 
+(global-unset-key (kbd "C-z"))
+
 (put 'upcase-region 'disabled nil)
 
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
