@@ -134,6 +134,7 @@
 (require 'eglot)
 (add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1) (eldoc-mode -1)))
 (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
+(setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider)))
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
 
