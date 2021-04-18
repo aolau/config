@@ -132,6 +132,9 @@
 ;; yasnippet
 (yas-global-mode)
 
+;; org-mode
+(electric-indent-mode -1)
+
 ;; C++
 (require 'eglot)
 (add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1) (eldoc-mode -1)))
