@@ -6,3 +6,9 @@ XF86AudioLowerVolume
 
 "amixer set Master toggle"
 XF86AudioMute
+
+"setxkbmap us"
+XF86AudioNext
+
+"setxkbmap se"
+XF86AudioPrev
