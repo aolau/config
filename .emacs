@@ -90,11 +90,18 @@
 (global-set-key (kbd "M-*") 'pop-tag-mark)
 (global-set-key (kbd "C-c g") 'magit-status)
 
-(windmove-default-keybindings)
+(global-set-key (kbd "C-c h") 'windmove-left)
+(global-set-key (kbd "C-c l") 'windmove-right)
+(global-set-key (kbd "C-c j") 'windmove-down)
+(global-set-key (kbd "C-c k") 'windmove-up)
+
+;(windmove-default-keybindings)
 
 ;; Rgrep
 (eval-after-load "grep"
   '(grep-compute-defaults))
+
+(setq projectile-use-git-grep t)
 
 (require 'paredit)
 
@@ -133,7 +140,7 @@
 (yas-global-mode)
 
 ;; org-mode
-(electric-indent-mode -1)
+;(electric-indent-mode -1)
 
 ;; C++
 (require 'eglot)
