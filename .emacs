@@ -42,6 +42,7 @@
 (setq-default c-basic-offset 4
               c-default-style "stroustrup"
               tab-width 4
+              typescript-ts-mode-indent-offset 4
               indent-tabs-mode nil
               lua-indent-level 2)
 
@@ -67,7 +68,7 @@
 
 ;; Install my packages
 (defvar aolau-packages
-  '(company slime slime-company magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet cmake-mode typescript-mode eglot elpy))
+  '(company slime slime-company magit paredit ivy counsel counsel-projectile smex zenburn-theme afternoon-theme yasnippet cmake-mode typescript-mode tide elpy))
 
 (require 'cl-lib)
 
@@ -168,10 +169,33 @@
 (setq projectile-indexing-method 'alien)
 
 ;; For elpy
-(setq elpy-rpc-python-command "python3.7")
+(setq elpy-rpc-python-command "python3.10")
 ;; For interactive shell
-(setq python-shell-interpreter "python3.7"
+(setq python-shell-interpreter "python3.10"
       python-shell-interpreter-args "-i")
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+(add-hook 'typescript-ts-mode-hook #'tide-setup)
+
+(setq treesit-language-source-alist
+      '((cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+        (c "https://github.com/tree-sitter/tree-sitter-c")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")))
+
+(setq major-mode-remap-alist
+      '(
+;;    (yaml-mode . yaml-ts-mode)
+;;    (bash-mode . bash-ts-mode)
+;;    (cmake-mode . cmake-ts-mode)
+;;    (c-mode . c-ts-mode)
+;;    (c++-mode . c++-ts-mode)
+;;    (js2-mode . js-ts-mode)
+    (typescript-mode . typescript-ts-mode)
+;;    (json-mode . json-ts-mode)
+;;    (css-mode . css-ts-mode)
+      ;;    (python-mode . python-ts-mode))
+      ))
 
 (defun load-if-exists (filename)
   (if (file-exists-p filename)
