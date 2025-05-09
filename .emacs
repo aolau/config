@@ -39,7 +39,7 @@
 (setq auto-save-default nil)
 
 ;; Setup tabs and spaces
-(setq-default c-basic-offset 4
+(setq-default c-ts-mode-indent-offset 4
               c-default-style "stroustrup"
               tab-width 4
               typescript-ts-mode-indent-offset 4
@@ -147,9 +147,9 @@
 (require 'eglot)
 (add-hook 'eglot-managed-mode-hook (lambda () (flymake-mode -1) (eldoc-mode -1)))
 (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-(setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider)))
-(add-hook 'c-mode-hook 'eglot-ensure)
-(add-hook 'c++-mode-hook 'eglot-ensure)
+(setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider :documentFormattingProvider :documentOnTypeFormattingProvider :inlayHintProvider)))
+(add-hook 'c-ts-mode-hook 'eglot-ensure)
+(add-hook 'c++-ts-mode-hook 'eglot-ensure)
 
 ;; Setup Common Lisp
 (setq inferior-lisp-program "sbcl")
@@ -169,10 +169,12 @@
 (setq projectile-indexing-method 'alien)
 
 ;; For elpy
-(setq elpy-rpc-python-command "python3.10")
+(setq elpy-rpc-python-command "python3")
 ;; For interactive shell
-(setq python-shell-interpreter "python3.10"
+(setq python-shell-interpreter "python3"
       python-shell-interpreter-args "-i")
+
+(add-hook 'python-ts-mode-hook 'eglot-ensure)
 
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 (add-hook 'typescript-ts-mode-hook #'tide-setup)
@@ -188,14 +190,14 @@
 ;;    (yaml-mode . yaml-ts-mode)
 ;;    (bash-mode . bash-ts-mode)
 ;;    (cmake-mode . cmake-ts-mode)
-;;    (c-mode . c-ts-mode)
-;;    (c++-mode . c++-ts-mode)
+    (c-mode . c-ts-mode)
+    (c++-mode . c++-ts-mode)
 ;;    (js2-mode . js-ts-mode)
     (typescript-mode . typescript-ts-mode)
 ;;    (json-mode . json-ts-mode)
 ;;    (css-mode . css-ts-mode)
-      ;;    (python-mode . python-ts-mode))
-      ))
+    (python-mode . python-ts-mode))
+      )
 
 (defun load-if-exists (filename)
   (if (file-exists-p filename)
