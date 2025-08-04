@@ -32,6 +32,10 @@
   (interactive)
   (compile (concat "cd " *otii-root-common* " && npm run lint")))
 
+(defun otii-server-lint ()
+  (interactive)
+  (compile (concat "cd " *otii-root-server* " && npm run lint")))
+
 (defun otii-git-status ()
   (interactive)
   (magit-status *otii-root*))
